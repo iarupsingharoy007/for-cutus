@@ -564,11 +564,29 @@ p {
 /* ============================================================
    13. MUSIC TOGGLE
    ============================================================ */
-.music-toggle {
+.music-control {
   position: fixed;
   bottom: 1.25rem;
   right: 1.25rem;
   z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.music-hint {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-rose-dark);
+  background: var(--color-white);
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(201, 67, 109, 0.14);
+  white-space: nowrap;
+  animation: hintFade 0.3s var(--ease-soft);
+}
+
+.music-toggle {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
@@ -580,6 +598,7 @@ p {
   justify-content: center;
   color: var(--color-rose-dark);
   transition: transform 0.25s var(--ease-soft);
+  flex-shrink: 0;
 }
 
 .music-toggle:hover {
@@ -588,6 +607,17 @@ p {
 
 .music-toggle[aria-pressed="true"] .music-toggle__icon {
   animation: spin 3s linear infinite;
+}
+
+@keyframes hintFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================================================

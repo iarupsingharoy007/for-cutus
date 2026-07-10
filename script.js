@@ -35,6 +35,8 @@
     fireworks: document.getElementById("fireworks"),
     balloons: document.getElementById("balloons"),
     musicToggle: document.getElementById("music-toggle"),
+    musicControl: document.getElementById("music-control"),
+    musicHint: document.getElementById("music-hint"),
     bgMusic: document.getElementById("bg-music"),
   };
 
@@ -394,33 +396,77 @@
   }
 
   /* ============================================================
-     8. MUSIC TOGGLE (optional — hidden if music.mp3 is missing)
+     8. MUSIC (autoplay on load, tap to pause/resume)
      ============================================================ */
-  function initMusic() {
-    const { bgMusic, musicToggle } = dom;
-    if (!bgMusic || !musicToggle) return;
+  function setMusicUI(isPlaying) {
+    const { musicToggle, musicHint } = dom;
+    musicToggle.setAttribute("aria-pressed", String(isPlaying));
+    musicToggle.setAttribute(
+      "aria-label",
+      isPlaying ? "Pause background music" : "Play background music"
+    );
+    if (musicHint) musicHint.textContent = isPlaying ? "tap to pause" : "tap to play";
+  }
 
-    // Only reveal the control once we know the track can actually load.
-    bgMusic.addEventListener("canplaythrough", () => {
-      musicToggle.hidden = false;
-    });
+  function initMusic() {
+    const { bgMusic, musicToggle, musicControl } = dom;
+    if (!bgMusic || !musicToggle || !musicControl) return;
+
+    let hasAttemptedAutoplay = false;
+
+    function revealControl() {
+      musicControl.hidden = false;
+    }
+
+    function tryAutoplay() {
+      if (hasAttemptedAutoplay) return;
+      hasAttemptedAutoplay = true;
+
+      bgMusic
+        .play()
+        .then(() => {
+          revealControl();
+          setMusicUI(true);
+        })
+        .catch(() => {
+          // Autoplay was blocked — fall back to starting on the very
+          // first interaction anywhere on the page.
+          revealControl();
+          setMusicUI(false);
+          document.addEventListener("pointerdown", startOnFirstInteraction, {
+            once: true,
+          });
+        });
+    }
+
+    function startOnFirstInteraction(event) {
+      // If that first tap landed on the toggle itself, let its own
+      // click handler manage play/pause instead of double-triggering.
+      if (event.target.closest("#music-toggle")) return;
+
+      bgMusic
+        .play()
+        .then(() => setMusicUI(true))
+        .catch(() => {
+          /* still blocked (e.g. no supported source) — leave paused UI */
+        });
+    }
+
     bgMusic.addEventListener("error", () => {
-      musicToggle.hidden = true;
+      musicControl.hidden = true;
     });
+
+    bgMusic.addEventListener("canplaythrough", tryAutoplay, { once: true });
 
     musicToggle.addEventListener("click", () => {
-      const isPlaying = !bgMusic.paused;
-
-      if (isPlaying) {
-        bgMusic.pause();
-        musicToggle.setAttribute("aria-pressed", "false");
-        musicToggle.setAttribute("aria-label", "Play background music");
+      if (bgMusic.paused) {
+        bgMusic
+          .play()
+          .then(() => setMusicUI(true))
+          .catch(() => setMusicUI(false));
       } else {
-        bgMusic.play().catch(() => {
-          musicToggle.hidden = true;
-        });
-        musicToggle.setAttribute("aria-pressed", "true");
-        musicToggle.setAttribute("aria-label", "Pause background music");
+        bgMusic.pause();
+        setMusicUI(false);
       }
     });
   }

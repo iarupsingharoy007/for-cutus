@@ -241,17 +241,19 @@
   <!-- ============================================================
        MUSIC (optional — file may not exist, JS handles that gracefully)
   ============================================================= -->
-  <button
-    id="music-toggle"
-    class="music-toggle"
-    type="button"
-    aria-label="Play background music"
-    aria-pressed="false"
-    hidden
-  >
-    <span class="music-toggle__icon" aria-hidden="true">♪</span>
-  </button>
-  <audio id="bg-music" src="music.mp3" loop preload="none"></audio>
+  <div id="music-control" class="music-control" hidden>
+    <button
+      id="music-toggle"
+      class="music-toggle"
+      type="button"
+      aria-label="Pause background music"
+      aria-pressed="true"
+    >
+      <span class="music-toggle__icon" aria-hidden="true">♪</span>
+    </button>
+    <span id="music-hint" class="music-hint" aria-hidden="true">tap to pause</span>
+  </div>
+  <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 
   <script src="script.js"></script>
 </body>
