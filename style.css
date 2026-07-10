@@ -422,11 +422,11 @@ p {
   transform: rotate(0deg) scale(1.06);
 }
 
-/* for landscape source photos where cropping to the default portrait
-   frame would cut someone out of the shot */
+/* for the car-selfie photo, which is pre-cropped/letterboxed to this
+   exact 4:3 ratio so it always displays in full, with no reliance on
+   object-fit behavior */
 .polaroid--wide .polaroid__frame {
   aspect-ratio: 4 / 3;
-  background: var(--color-cream);
 }
 
 .polaroid--wide .polaroid__frame img {
