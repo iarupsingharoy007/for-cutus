@@ -381,6 +381,47 @@ p {
   line-height: 1.6;
 }
 
+.memories__grid--four {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+/* ============================================================
+   9b. GALLERY (extra polaroids)
+   ============================================================ */
+.gallery {
+  text-align: center;
+}
+
+.gallery__title {
+  font-size: clamp(1.3rem, 3.2vw, 1.7rem);
+  margin-bottom: 1.75rem;
+  color: var(--color-ink);
+}
+
+.gallery__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+.polaroid--tiny {
+  width: min(200px, 42vw);
+  padding: 0.6rem 0.6rem 1rem;
+}
+
+.polaroid--tilt-left {
+  transform: rotate(-4deg);
+}
+
+.polaroid--tilt-right {
+  transform: rotate(4deg);
+}
+
+.polaroid--tiny:hover {
+  transform: rotate(0deg) scale(1.06);
+}
+
 /* ============================================================
    10. BUTTONS
    ============================================================ */
