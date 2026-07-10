@@ -1,155 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I'm Sorry ❤️</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I'm Sorry, Cutus ❤️</title>
+  <meta name="description" content="A little apology, for the person who means everything." />
+  <meta name="theme-color" content="#e8628c" />
+  <link rel="icon" href="favicon.png" />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-    <!-- Floating Hearts Background -->
-    <div id="hearts-container"></div>
+  <!-- ============================================================
+       AMBIENT BACKGROUND (decorative, non-interactive)
+  ============================================================= -->
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__gradient"></div>
+    <canvas id="sparkle-canvas"></canvas>
+    <div id="heart-field" class="heart-field"></div>
+  </div>
 
-    <!-- Main Card -->
-    <main class="container">
+  <!-- ============================================================
+       PAGE 1 — THE APOLOGY
+  ============================================================= -->
+  <main id="apology-page" class="page">
 
-        <section class="card">
+    <!-- HERO -->
+    <section class="hero">
+      <p class="hero__eyebrow">a small letter, for you</p>
+      <h1 class="hero__title">
+        I'm sorry, <span class="script">Cutus</span>
+        <span aria-hidden="true">❤️</span>
+      </h1>
+      <p class="hero__subtitle">
+        Before you decide anything — give your Golu one minute.
+      </p>
 
-            <h1>I'm Sorry, Cutus ❤️</h1>
-
-            <p class="subtitle">
-                I know I made mistakes...
-                <br>
-                But before you decide anything,
-                please give me a minute to tell you what's in my heart.
-            </p>
-
-            <!-- Clickable Heart -->
-            <div class="heart-container">
-
-                <button id="heartButton" class="heart-btn">
-                    ❤️
-                </button>
-
-            </div>
-
-            <!-- Polaroid Image -->
-            <div class="polaroid">
-
-                <!-- Replace this image with your own -->
-                <img src="our-photo.jpeg" alt="Our Photo">
-
-                <p class="caption">
-                    Every moment with you is my favourite memory ❤️
-                </p>
-
-            </div>
-
-            <!-- Letter -->
-            <section id="letter">
-
-                <h2>Dear Cutus,</h2>
-
-                <p>
-                    I'm truly sorry for hurting you.
-                    You deserve love, patience and understanding every single day.
-                </p>
-
-                <p>
-                    Every smile, every hug, every laugh and every little moment
-                    we shared means more to me than words can ever explain.
-                </p>
-
-                <p>
-                    I know words alone cannot fix everything,
-                    but I promise I'll learn from my mistakes,
-                    become a better person,
-                    and never stop choosing you.
-                </p>
-
-                <p>
-                    Thank you for being my happiness,
-                    my peace,
-                    and my favourite person.
-                </p>
-
-                <p class="ending">
-                    I love you today,
-                    tomorrow,
-                    and forever.
-                </p>
-
-                <h3>Your Golu ❤️</h3>
-
-            </section>
-
-            <!-- Buttons -->
-            <div class="buttons">
-
-                <button id="forgiveBtn" class="yes-btn">
-                    ❤️ Forgive Me?
-                </button>
-
-                <button id="noBtn" class="no-btn">
-                    🙈 No
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
-
-    <!-- Celebration Screen -->
-    <section id="successScreen" class="hidden">
-
-        <div class="success-card">
-
-            <h1>❤️ Thank You ❤️</h1>
-
-            <h2>You made me the happiest person.</h2>
-
-            <p>
-                Thank you for giving us another chance.
-            </p>
-
-            <p>
-                I promise to keep earning your smile,
-                every single day.
-            </p>
-
-            <h3>
-                I Love You Forever ❤️
-            </h3>
-
-            <h2>Your Golu</h2>
-
-        </div>
-
+      <div class="heart-launcher">
+        <button
+          id="heart-button"
+          class="heart-button"
+          type="button"
+          aria-label="Tap the heart"
+        >
+          <span aria-hidden="true">❤️</span>
+        </button>
+        <p class="heart-launcher__hint" aria-hidden="true">tap it — go on</p>
+      </div>
     </section>
 
-    <!-- Confetti -->
-    <canvas id="confettiCanvas"></canvas>
+    <!-- PHOTO -->
+    <section class="photo-section" aria-label="A photo of us">
+      <figure class="polaroid">
+        <div class="polaroid__frame">
+          <img
+            src="our-photo.jpeg"
+            alt="A photo of the two of us together, smiling"
+            loading="lazy"
+          />
+        </div>
+        <figcaption class="polaroid__caption">
+          my favourite place will always be beside you
+        </figcaption>
+      </figure>
+    </section>
 
-    <!-- Background Music -->
-    <!--
-    <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
-    -->
+    <!-- LETTER -->
+    <section class="letter" aria-label="A letter to Cutus">
+      <p class="letter__to">Dear Cutus,</p>
 
-    <!-- JS -->
-    <script src="script.js"></script>
+      <p>
+        I got this wrong, and I know it. Not the small kind of wrong —
+        the kind that landed on you, and that's on me.
+      </p>
 
+      <p>
+        You've given me your patience more times than I've earned it.
+        You've stayed soft with me even when I made that hard. I noticed.
+        I just didn't say it enough, and I'm saying it now.
+      </p>
+
+      <p>
+        I'm not asking you to forget it. I'm asking for the chance to
+        actually do better — in the ordinary, everyday ways, not just
+        in a message like this one.
+      </p>
+
+      <p>
+        Because underneath all of it, one thing hasn't moved an inch:
+        you are still my favourite person, my calmest place, and the
+        one I keep choosing.
+      </p>
+
+      <p class="letter__signoff">
+        Forever yours,<br />
+        <span class="script letter__name">Your Golu</span>
+      </p>
+    </section>
+
+    <!-- MEMORIES -->
+    <section class="memories" aria-label="Our little world">
+      <h2 class="memories__title">Our little world</h2>
+
+      <div class="memories__grid">
+        <article class="memory-card">
+          <span class="memory-card__icon" aria-hidden="true">😂</span>
+          <h3>Our laughs</h3>
+          <p>Every dumb joke that somehow still gets us both.</p>
+        </article>
+
+        <article class="memory-card">
+          <span class="memory-card__icon" aria-hidden="true">🤗</span>
+          <h3>Every hug</h3>
+          <p>The kind that fixes a day without a single word.</p>
+        </article>
+
+        <article class="memory-card">
+          <span class="memory-card__icon" aria-hidden="true">🍜</span>
+          <h3>Food dates</h3>
+          <p>Anything tastes better when you're across the table.</p>
+        </article>
+
+        <article class="memory-card">
+          <span class="memory-card__icon" aria-hidden="true">🌙</span>
+          <h3>Late night talks</h3>
+          <p>The ones that start small and end at 3am.</p>
+        </article>
+
+        <article class="memory-card">
+          <span class="memory-card__icon" aria-hidden="true">🧭</span>
+          <h3>Every journey</h3>
+          <p>It was never really about the place.</p>
+        </article>
+
+        <article class="memory-card">
+          <span class="memory-card__icon" aria-hidden="true">♾️</span>
+          <h3>Forever</h3>
+          <p>The chapter we're still writing, together.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- DECISION -->
+    <section class="decision" aria-label="Forgive me?">
+      <p class="decision__prompt">So... will you forgive your Golu?</p>
+
+      <div class="decision__buttons">
+        <button id="forgive-button" class="btn btn--primary" type="button">
+          Forgive me <span aria-hidden="true">❤️</span>
+        </button>
+        <button
+          id="no-button"
+          class="btn btn--ghost is-runaway"
+          type="button"
+        >
+          No <span aria-hidden="true">🙈</span>
+        </button>
+      </div>
+
+      <p class="decision__hint">psst — try tapping the heart up above a few times</p>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       PAGE 2 — THE CELEBRATION (replaces the apology page)
+  ============================================================= -->
+  <main id="celebration-page" class="page page--celebration is-hidden" hidden>
+    <div id="fireworks" class="fireworks" aria-hidden="true"></div>
+    <div id="balloons" class="balloons" aria-hidden="true"></div>
+
+    <section class="celebration">
+      <p class="celebration__eyebrow">thank you</p>
+      <h1 class="celebration__title">
+        Thank you, <span class="script">Cutus</span>
+        <span aria-hidden="true">❤️</span>
+      </h1>
+
+      <figure class="polaroid polaroid--small">
+        <div class="polaroid__frame">
+          <img src="our-photo.jpeg" alt="A photo of the two of us together, smiling" />
+        </div>
+      </figure>
+
+      <p class="celebration__text">
+        You just made your Golu the happiest person alive.
+        Thank you for giving us another chance.
+      </p>
+
+      <ul class="promise-list">
+        <li>More listening</li>
+        <li>More patience</li>
+        <li>More small moments</li>
+        <li>More us</li>
+      </ul>
+
+      <blockquote class="celebration__quote">
+        every heartbeat reminds me how lucky I am to have you
+      </blockquote>
+
+      <h2 class="celebration__final">
+        I love you, forever <span aria-hidden="true">❤️</span>
+      </h2>
+      <p class="script celebration__signature">— Your Golu</p>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       SECRET POPUP
+  ============================================================= -->
+  <div
+    id="secret-popup"
+    class="popup is-hidden"
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="secret-popup-title"
+  >
+    <div class="popup__card">
+      <h2 id="secret-popup-title">You found my secret <span aria-hidden="true">❤️</span></h2>
+      <p>
+        If you've read this far — I just want you to know you're the best
+        thing that's ever happened to me, and no matter what, I'll always
+        choose you.
+      </p>
+      <button id="close-popup" class="btn btn--primary" type="button">
+        Close <span aria-hidden="true">❤️</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MUSIC (optional — file may not exist, JS handles that gracefully)
+  ============================================================= -->
+  <button
+    id="music-toggle"
+    class="music-toggle"
+    type="button"
+    aria-label="Play background music"
+    aria-pressed="false"
+    hidden
+  >
+    <span class="music-toggle__icon" aria-hidden="true">♪</span>
+  </button>
+  <audio id="bg-music" src="music.mp3" loop preload="none"></audio>
+
+  <script src="script.js"></script>
 </body>
 </html>
