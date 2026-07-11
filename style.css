@@ -117,6 +117,108 @@ p {
 }
 
 /* ============================================================
+   4b. LOGIN GATE
+   ============================================================ */
+.login-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, var(--color-cream), var(--color-pink) 60%, #f3e6ff);
+}
+
+.login-card {
+  width: min(380px, 100%);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.75rem, 6vw, 2.5rem);
+  text-align: center;
+}
+
+.login-card__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-rose-dark);
+  margin-bottom: 0.5rem;
+}
+
+.login-card__title {
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  margin-bottom: 0.5rem;
+}
+
+.login-card__subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.login-field {
+  display: block;
+  text-align: left;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+}
+
+.login-field span {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(201, 67, 109, 0.25);
+  background: var(--color-white);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--color-ink);
+}
+
+.login-field input:focus-visible {
+  outline: 2px solid var(--color-rose);
+  outline-offset: 2px;
+}
+
+.login-card__error {
+  color: var(--color-rose-dark);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.login-card__submit {
+  width: 100%;
+}
+
+.login-card.is-shaking {
+  animation: shake 0.4s var(--ease-soft);
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  75% {
+    transform: translateX(8px);
+  }
+}
+
+/* ============================================================
    4. LAYOUT
    ============================================================ */
 .page {

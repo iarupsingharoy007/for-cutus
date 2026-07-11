@@ -20,6 +20,53 @@
 <body>
 
   <!-- ============================================================
+       LOGIN GATE — shown first; site-content stays hidden until
+       the correct credentials are entered.
+  ============================================================= -->
+  <div id="login-gate" class="login-gate">
+    <form id="login-form" class="login-card" novalidate>
+      <p class="login-card__eyebrow">private</p>
+      <h1 class="login-card__title">For us only <span aria-hidden="true">🔒</span></h1>
+      <p class="login-card__subtitle">Enter the password to continue</p>
+
+      <label class="login-field">
+        <span>Username</span>
+        <input
+          id="login-username"
+          type="text"
+          autocomplete="username"
+          autocapitalize="off"
+          spellcheck="false"
+          required
+        />
+      </label>
+
+      <label class="login-field">
+        <span>Password</span>
+        <input
+          id="login-password"
+          type="password"
+          autocomplete="current-password"
+          required
+        />
+      </label>
+
+      <p id="login-error" class="login-card__error" hidden>
+        That's not quite right — try again.
+      </p>
+
+      <button type="submit" class="btn btn--primary login-card__submit">
+        Unlock <span aria-hidden="true">❤️</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- ============================================================
+       SITE CONTENT — everything below is hidden until unlocked.
+  ============================================================= -->
+  <div id="site-content" hidden>
+
+  <!-- ============================================================
        AMBIENT BACKGROUND (decorative, non-interactive)
   ============================================================= -->
   <div class="ambient" aria-hidden="true">
@@ -278,6 +325,9 @@
     <span id="music-hint" class="music-hint" aria-hidden="true">tap to pause</span>
   </div>
   <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
+
+  </div>
+  <!-- /#site-content -->
 
   <script src="script.js"></script>
 </body>

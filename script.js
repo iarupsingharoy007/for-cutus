@@ -3,6 +3,7 @@
    Organized as an IIFE so nothing leaks into the global scope.
    Sections:
      1. Setup & element refs
+     1b. Auth gate (hardcoded username/password)
      2. Ambient background (floating hearts + sparkles)
      3. Heart button (burst effect + secret unlock)
      4. Runaway "no" button
@@ -38,7 +39,77 @@
     musicControl: document.getElementById("music-control"),
     musicHint: document.getElementById("music-hint"),
     bgMusic: document.getElementById("bg-music"),
+    loginGate: document.getElementById("login-gate"),
+    loginForm: document.getElementById("login-form"),
+    loginUsername: document.getElementById("login-username"),
+    loginPassword: document.getElementById("login-password"),
+    loginError: document.getElementById("login-error"),
+    siteContent: document.getElementById("site-content"),
   };
+
+  /* ============================================================
+     1b. AUTH GATE
+     Change these two values to whatever you and her should type in.
+     This is a friendly lock, not real security — anyone reading the
+     page source could find these, so don't reuse a password you
+     care about elsewhere.
+     ============================================================ */
+  const AUTH_USERNAME = "cutus";
+  const AUTH_PASSWORD = "goluandcutus";
+  const AUTH_STORAGE_KEY = "forCutusUnlocked";
+
+  function unlockSite() {
+    dom.loginGate.hidden = true;
+    dom.loginGate.classList.add("is-hidden");
+    dom.siteContent.hidden = false;
+    initSite();
+  }
+
+  function handleLoginSubmit(event) {
+    event.preventDefault();
+
+    const enteredUsername = dom.loginUsername.value.trim().toLowerCase();
+    const enteredPassword = dom.loginPassword.value;
+
+    const isCorrect =
+      enteredUsername === AUTH_USERNAME.toLowerCase() &&
+      enteredPassword === AUTH_PASSWORD;
+
+    if (isCorrect) {
+      try {
+        localStorage.setItem(AUTH_STORAGE_KEY, "true");
+      } catch (_err) {
+        /* localStorage unavailable (e.g. private browsing) — that's fine,
+           she'll just need to log in again next visit */
+      }
+      dom.loginError.hidden = true;
+      unlockSite();
+    } else {
+      dom.loginError.hidden = false;
+      dom.loginForm.classList.remove("is-shaking");
+      // restart the shake animation even on repeated wrong attempts
+      void dom.loginForm.offsetWidth;
+      dom.loginForm.classList.add("is-shaking");
+      dom.loginPassword.value = "";
+      dom.loginPassword.focus();
+    }
+  }
+
+  function initAuth() {
+    let alreadyUnlocked = false;
+    try {
+      alreadyUnlocked = localStorage.getItem(AUTH_STORAGE_KEY) === "true";
+    } catch (_err) {
+      alreadyUnlocked = false;
+    }
+
+    if (alreadyUnlocked) {
+      unlockSite();
+      return;
+    }
+
+    dom.loginForm.addEventListener("submit", handleLoginSubmit);
+  }
 
   /* ============================================================
      2. AMBIENT BACKGROUND
@@ -474,7 +545,7 @@
   /* ============================================================
      INIT
      ============================================================ */
-  function init() {
+  function initSite() {
     initHeartField();
     initSparkles();
     initRunawayButton();
@@ -485,5 +556,5 @@
     dom.forgiveButton?.addEventListener("click", showCelebrationPage);
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", initAuth);
 })();
