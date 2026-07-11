@@ -529,6 +529,17 @@ p {
   font-size: clamp(2rem, 6vw, 3rem);
 }
 
+.celebration__photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1rem, 4vw, 2rem);
+}
+
+.celebration__photos .polaroid--small {
+  margin-inline: 0;
+}
+
 .celebration__text {
   max-width: 40ch;
 }
